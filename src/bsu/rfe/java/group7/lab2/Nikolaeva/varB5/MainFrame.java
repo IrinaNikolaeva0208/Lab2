@@ -32,30 +32,30 @@ public class MainFrame extends JFrame {
 	private Box hboxFormulaType = Box.createHorizontalBox();
 	private int formulaId = 1;
 	public Double calculate1(Double x, Double y, Double z) {
-	return Math.pow(Math.cos(Math.PI*x*x*x)+Math.log((1+y)*(1+y)), 0.25)*(Math.pow(Math.E,z*z)+Math.sqrt(1/x)+Math.cos(Math.pow(Math.E,y)));
+		return Math.pow(Math.cos(Math.PI*x*x*x)+Math.log((1+y)*(1+y)), 0.25)*(Math.pow(Math.E,z*z)+Math.sqrt(1/x)+Math.cos(Math.pow(Math.E,y)));
 	}
 	public Double calculate2(Double x, Double y, Double z) {
-	return Math.pow(Math.E, 0.5*x)/(Math.sqrt(z+y)*z*Math.log(x));
+		return Math.pow(Math.E, 0.5*x)/(Math.sqrt(z+y)*z*Math.log(x));
 	}
 	private void addRadioButton(String buttonName, final int formulaId) {
-	JRadioButton button = new JRadioButton(buttonName);
-	button.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent ev) {
-	MainFrame.this.formulaId = formulaId;
-	}
-	});
-	radioButtons.add(button);
-	hboxFormulaType.add(button);
+		JRadioButton button = new JRadioButton(buttonName);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				MainFrame.this.formulaId = formulaId;
+			}
+		});
+		radioButtons.add(button);
+		hboxFormulaType.add(button);
 	}
 	public MainFrame() {
-	super("Вычисление формулы");
+	super("Formula calculating");
 	setSize(WIDTH, HEIGHT);
 	Toolkit kit = Toolkit.getDefaultToolkit();
 	setLocation((kit.getScreenSize().width - WIDTH)/2,
 	(kit.getScreenSize().height - HEIGHT)/2);
 	hboxFormulaType.add(Box.createHorizontalGlue());
-	addRadioButton("Формула 1", 1);
-	addRadioButton("Формула 2", 2);
+	addRadioButton("Formula 1", 1);
+	addRadioButton("Formula 2", 2);
 	radioButtons.setSelected(
 	radioButtons.getElements().nextElement().getModel(), true);
 	hboxFormulaType.add(Box.createHorizontalGlue());
@@ -86,7 +86,7 @@ public class MainFrame extends JFrame {
 	hboxVariables.add(Box.createHorizontalStrut(10));
 	hboxVariables.add(textFieldZ);
 	hboxVariables.add(Box.createHorizontalGlue());
-	JLabel labelForResult = new JLabel("Результат:");
+	JLabel labelForResult = new JLabel("Result:");
 	textFieldResult = new JTextField("0", 10);
 	textFieldResult.setMaximumSize(
 	textFieldResult.getPreferredSize());
@@ -97,56 +97,57 @@ public class MainFrame extends JFrame {
 	hboxResult.add(textFieldResult);
 	hboxResult.add(Box.createHorizontalGlue());
 	hboxResult.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-	JButton buttonCalc = new JButton("Вычислить");
+	JButton buttonCalc = new JButton("Calculate");
 	buttonCalc.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent ev) {
-		try {
-			 Double x = Double.parseDouble(textFieldX.getText());
-			 Double y = Double.parseDouble(textFieldY.getText());
-			 Double z = Double.parseDouble(textFieldZ.getText());
-			 Double result;
-			 if (formulaId==1)
-			result = calculate1(x, y, z);
-			 else
-			result = calculate2(x, y, z);
-			 textFieldResult.setText(result.toString());
-			} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(MainFrame.this,
-			"Ошибка в формате записи числа с плавающей точкой", "Ошибочный формат числа",
-			JOptionPane.WARNING_MESSAGE);
+		public void actionPerformed(ActionEvent ev) {
+			try {
+				 Double x = Double.parseDouble(textFieldX.getText());
+				 Double y = Double.parseDouble(textFieldY.getText());
+				 Double z = Double.parseDouble(textFieldZ.getText());
+				 Double result;
+				 if (formulaId==1)
+					 result = calculate1(x, y, z);
+				 else
+					 result = calculate2(x, y, z);
+				 textFieldResult.setText(result.toString());
+				} 
+			catch (NumberFormatException ex) {
+				JOptionPane.showMessageDialog(MainFrame.this,
+				"Error in the format of writing a floating-point number", "Wrong number format",
+				JOptionPane.WARNING_MESSAGE);
+				}
 			}
-			}
-			});
-			JButton buttonReset = new JButton("Очистить поля");
-			buttonReset.addActionListener(new ActionListener() {
+		});
+		JButton buttonReset = new JButton("Clear");
+		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-			textFieldX.setText("0");
-			textFieldY.setText("0");
-			textFieldZ.setText("0");
-			textFieldResult.setText("0");
+				textFieldX.setText("0");
+				textFieldY.setText("0");
+				textFieldZ.setText("0");
+				textFieldResult.setText("0");
 			}
-			});
-			Box hboxButtons = Box.createHorizontalBox();
-			hboxButtons.add(Box.createHorizontalGlue());
-			hboxButtons.add(buttonCalc);
-			hboxButtons.add(Box.createHorizontalStrut(30));
-			hboxButtons.add(buttonReset);
-			hboxButtons.add(Box.createHorizontalGlue());
-			hboxButtons.setBorder(
-			BorderFactory.createLineBorder(Color.GREEN));
-			Box contentBox = Box.createVerticalBox();
-			contentBox.add(Box.createVerticalGlue());
-			contentBox.add(hboxFormulaType);
-			contentBox.add(hboxVariables);
-			contentBox.add(hboxResult);
-			contentBox.add(hboxButtons);
-			contentBox.add(Box.createVerticalGlue());
-			getContentPane().add(contentBox, BorderLayout.CENTER);
-			}
-			public static void main(String[] args) {
+		});
+		Box hboxButtons = Box.createHorizontalBox();
+		hboxButtons.add(Box.createHorizontalGlue());
+		hboxButtons.add(buttonCalc);
+		hboxButtons.add(Box.createHorizontalStrut(30));
+		hboxButtons.add(buttonReset);
+		hboxButtons.add(Box.createHorizontalGlue());
+		hboxButtons.setBorder(
+		BorderFactory.createLineBorder(Color.GREEN));
+		Box contentBox = Box.createVerticalBox();
+		contentBox.add(Box.createVerticalGlue());
+		contentBox.add(hboxFormulaType);
+		contentBox.add(hboxVariables);
+		contentBox.add(hboxResult);
+		contentBox.add(hboxButtons);
+		contentBox.add(Box.createVerticalGlue());
+		getContentPane().add(contentBox, BorderLayout.CENTER);
+		}
+		public static void main(String[] args) {
 			MainFrame frame = new MainFrame();
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setVisible(true);
-			}
-			
 		}
+			
+}
