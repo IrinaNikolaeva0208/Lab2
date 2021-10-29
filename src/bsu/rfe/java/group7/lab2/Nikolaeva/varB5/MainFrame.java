@@ -62,12 +62,15 @@ public class MainFrame extends JFrame {
 	hboxFormulaType.setBorder(
 	BorderFactory.createLineBorder(Color.YELLOW));
 	JLabel labelForX = new JLabel("X:");
+	JLabel RadioX = new JLabel("X");
 	textFieldX = new JTextField("0", 10);
 	textFieldX.setMaximumSize(textFieldX.getPreferredSize());
 	JLabel labelForY = new JLabel("Y:");
+	JLabel RadioY = new JLabel("Y");
 	textFieldY = new JTextField("0", 10);
 	textFieldY.setMaximumSize(textFieldY.getPreferredSize());
 	JLabel labelForZ = new JLabel("Z:");
+	JLabel RadioZ = new JLabel("Z");
 	textFieldZ = new JTextField("0", 10);
 	textFieldZ.setMaximumSize(textFieldX.getPreferredSize());
 	Box hboxVariables = Box.createHorizontalBox();
@@ -97,6 +100,16 @@ public class MainFrame extends JFrame {
 	hboxResult.add(textFieldResult);
 	hboxResult.add(Box.createHorizontalGlue());
 	hboxResult.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+	Box hboxVars = Box.createHorizontalBox();
+	hboxVars.add(Box.createHorizontalGlue());
+	hboxVars.add(RadioX);
+	hboxVars.add(Box.createHorizontalStrut(10));
+	hboxVars.add(RadioY);
+	hboxVars.add(Box.createHorizontalStrut(10));
+	hboxVars.add(RadioZ);
+	hboxVars.add(Box.createHorizontalGlue());
+	hboxVars.setBorder(
+	BorderFactory.createLineBorder(Color.ORANGE));
 	JButton buttonCalc = new JButton("Calculate");
 	buttonCalc.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent ev) {
@@ -127,11 +140,17 @@ public class MainFrame extends JFrame {
 				textFieldResult.setText("0");
 			}
 		});
+		JButton buttonMC = new JButton("MC");
+		JButton buttonMplus = new JButton("M+");
 		Box hboxButtons = Box.createHorizontalBox();
 		hboxButtons.add(Box.createHorizontalGlue());
 		hboxButtons.add(buttonCalc);
 		hboxButtons.add(Box.createHorizontalStrut(30));
 		hboxButtons.add(buttonReset);
+		hboxButtons.add(Box.createHorizontalStrut(30));
+		hboxButtons.add(buttonMC);
+		hboxButtons.add(Box.createHorizontalStrut(30));
+		hboxButtons.add(buttonMplus);
 		hboxButtons.add(Box.createHorizontalGlue());
 		hboxButtons.setBorder(
 		BorderFactory.createLineBorder(Color.GREEN));
@@ -140,6 +159,7 @@ public class MainFrame extends JFrame {
 		contentBox.add(hboxFormulaType);
 		contentBox.add(hboxVariables);
 		contentBox.add(hboxResult);
+		contentBox.add(hboxVars);
 		contentBox.add(hboxButtons);
 		contentBox.add(Box.createVerticalGlue());
 		getContentPane().add(contentBox, BorderLayout.CENTER);
