@@ -24,9 +24,9 @@ public class MainFrame extends JFrame {
 
 	private static final int WIDTH = 450;
 	private static final int HEIGHT = 320;
-	Integer mem1;
-	Integer mem2;
-	Integer mem3;
+	Double mem1;
+	Double mem2;
+	Double mem3;
 	private JTextField textFieldX;
 	private JTextField textFieldY;
 	private JTextField textFieldZ;
@@ -36,10 +36,12 @@ public class MainFrame extends JFrame {
 	private Box hboxFormulaType = Box.createHorizontalBox();
 	private int formulaId = 1;
 	public Double calculate1(Double x, Double y, Double z) {
-		return Math.pow(Math.cos(Math.PI*x*x*x)+Math.log((1+y)*(1+y)), 0.25)*(Math.pow(Math.E,z*z)+Math.sqrt(1/x)+Math.cos(Math.pow(Math.E,y)));
+		//return Math.pow(Math.cos(Math.PI*x*x*x)+Math.log((1+y)*(1+y)), 0.25)*(Math.pow(Math.E,z*z)+Math.sqrt(1/x)+Math.cos(Math.pow(Math.E,y)));
+	return x*y*z;
 	}
 	public Double calculate2(Double x, Double y, Double z) {
-		return Math.pow(Math.E, 0.5*x)/(Math.sqrt(z+y)*z*Math.log(x));
+		//return Math.pow(Math.E, 0.5*x)/(Math.sqrt(z+y)*z*Math.log(x));
+		return x+y+z;
 	}
 	private void addRadioButton(String buttonName, final int formulaId) {
 		JRadioButton button = new JRadioButton(buttonName);
@@ -53,7 +55,7 @@ public class MainFrame extends JFrame {
 	}
 	Box hboxVars = Box.createHorizontalBox();
 	private int VarNum = 1;
-	private void addRadioVar(String buttonName, final int formulaId) {
+	private void addRadioVar(String buttonName, final int VarNum) {
 		JRadioButton button = new JRadioButton(buttonName);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
@@ -169,6 +171,29 @@ public class MainFrame extends JFrame {
 			}
 		});
 		JButton buttonMplus = new JButton("M+");
+		buttonMplus.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				Double Result = Double.parseDouble(textFieldResult.getText());
+				Double x = Double.parseDouble(textFieldX.getText());
+				Double y = Double.parseDouble(textFieldY.getText());
+				Double z = Double.parseDouble(textFieldZ.getText());
+				switch (VarNum) {
+				case 1:
+					if (mem1 == null) mem1 = x;
+					else Result += mem1;
+					break;
+				case 2:
+					if (mem2 == null) mem2 = y;
+					else Result += mem2;
+					break;
+				case 3:
+					if (mem3 == null) mem3 = z;
+					else Result += mem3;
+					break;
+				}
+				 textFieldResult.setText(Result.toString());
+			}
+		});
 		Box hboxButtons = Box.createHorizontalBox();
 		hboxButtons.add(Box.createHorizontalGlue());
 		hboxButtons.add(buttonCalc);
