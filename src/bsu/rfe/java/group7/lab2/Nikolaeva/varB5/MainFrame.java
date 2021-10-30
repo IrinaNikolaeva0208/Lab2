@@ -42,7 +42,7 @@ public class MainFrame extends JFrame {
 		return Math.pow(Math.E, 0.5*x)/(Math.sqrt(z+y)*z*Math.log(x));
 	}
 	
-	//радиокнопки для формул
+	//Formulas radio buttons
 	private void addRadioButton(String buttonName, final int formulaId) {
 		JRadioButton button = new JRadioButton(buttonName);
 		button.addActionListener(new ActionListener() {
@@ -54,7 +54,7 @@ public class MainFrame extends JFrame {
 		hboxFormulaType.add(button);
 	}
 	
-	//радиокнопки для переменных
+	//Variables radio buttons
 	Box hboxVars = Box.createHorizontalBox();
 	private int VarNum = 1;
 	private void addRadioVar(String buttonName, final int VarNum) {
@@ -74,7 +74,7 @@ public class MainFrame extends JFrame {
 	setLocation((kit.getScreenSize().width - WIDTH)/2,
 	(kit.getScreenSize().height - HEIGHT)/2);
 	
-	//коробка с радиокнопками для формул
+	//Box with formulas radio buttons 
 	hboxFormulaType.add(Box.createHorizontalGlue());
 	addRadioButton("Formula 1", 1);
 	addRadioButton("Formula 2", 2);
@@ -93,7 +93,7 @@ public class MainFrame extends JFrame {
 	textFieldZ = new JTextField("0", 10);
 	textFieldZ.setMaximumSize(textFieldX.getPreferredSize());
 	
-	//коробка со значениями переменных
+	//Box with Variables values
 	Box hboxVariables = Box.createHorizontalBox();
 	hboxVariables.setBorder(
 	BorderFactory.createLineBorder(Color.RED));
@@ -115,7 +115,7 @@ public class MainFrame extends JFrame {
 	textFieldResult.setMaximumSize(
 	textFieldResult.getPreferredSize());
 	
-	//коробка с результатом
+	//Result box
 	Box hboxResult = Box.createHorizontalBox();
 	hboxResult.add(Box.createHorizontalGlue());
 	hboxResult.add(labelForResult);
@@ -124,7 +124,7 @@ public class MainFrame extends JFrame {
 	hboxResult.add(Box.createHorizontalGlue());
 	hboxResult.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
-	//коробка с радиокнопками для переменных 
+	//Box with variables radio buttons
 	hboxVars.add(Box.createHorizontalGlue());
 	addRadioVar("Variable 1", 1);
 	addRadioVar("Variable 2", 2);
@@ -201,7 +201,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		//коробка с кнопками
+		//Buttons box
 		Box hboxButtons = Box.createHorizontalBox();
 		hboxButtons.add(Box.createHorizontalGlue());
 		hboxButtons.add(buttonCalc);
@@ -215,7 +215,7 @@ public class MainFrame extends JFrame {
 		hboxButtons.setBorder(
 		BorderFactory.createLineBorder(Color.GREEN));
 		
-		//сборка вертикальной коробки
+		//Vertical box
 		Box contentBox = Box.createVerticalBox();
 		contentBox.add(Box.createVerticalGlue());
 		contentBox.add(hboxFormulaType);
