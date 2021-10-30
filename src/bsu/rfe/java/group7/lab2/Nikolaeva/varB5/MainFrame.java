@@ -24,9 +24,9 @@ public class MainFrame extends JFrame {
 
 	private static final int WIDTH = 450;
 	private static final int HEIGHT = 320;
-	int mem1;
-	int mem2;
-	int mem3;
+	Integer mem1;
+	Integer mem2;
+	Integer mem3;
 	private JTextField textFieldX;
 	private JTextField textFieldY;
 	private JTextField textFieldZ;
@@ -155,7 +155,17 @@ public class MainFrame extends JFrame {
 		JButton buttonMC = new JButton("MC");
 		buttonMC.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				
+				switch (VarNum) {
+				case 1:
+					mem1=null;
+					break;
+				case 2:
+					mem2=null;
+					break;
+				case 3:
+					mem3=null;
+					break;
+				}
 			}
 		});
 		JButton buttonMplus = new JButton("M+");
