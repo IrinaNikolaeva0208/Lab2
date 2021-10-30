@@ -24,9 +24,9 @@ public class MainFrame extends JFrame {
 
 	private static final int WIDTH = 450;
 	private static final int HEIGHT = 320;
-	Double mem1;
-	Double mem2;
-	Double mem3;
+	Double mem1 = 0.0;
+	Double mem2 = 0.0;
+	Double mem3 = 0.0;
 	private JTextField textFieldX;
 	private JTextField textFieldY;
 	private JTextField textFieldZ;
@@ -116,9 +116,9 @@ public class MainFrame extends JFrame {
 	hboxResult.add(Box.createHorizontalGlue());
 	hboxResult.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 	hboxVars.add(Box.createHorizontalGlue());
-	addRadioVar("X", 1);
-	addRadioVar("Y", 2);
-	addRadioVar("Z", 3);
+	addRadioVar("Variable 1", 1);
+	addRadioVar("Variable 2", 2);
+	addRadioVar("Variable 3", 3);
 	radioVars.setSelected(
 	radioVars.getElements().nextElement().getModel(), true);
 	hboxVars.add(Box.createHorizontalGlue());
@@ -159,13 +159,13 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent ev) {
 				switch (VarNum) {
 				case 1:
-					mem1=null;
+					mem1 = 0.0;
 					break;
 				case 2:
-					mem2=null;
+					mem2 = 0.0;
 					break;
 				case 3:
-					mem3=null;
+					mem3 = 0.0;
 					break;
 				}
 			}
@@ -174,24 +174,20 @@ public class MainFrame extends JFrame {
 		buttonMplus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				Double Result = Double.parseDouble(textFieldResult.getText());
-				Double x = Double.parseDouble(textFieldX.getText());
-				Double y = Double.parseDouble(textFieldY.getText());
-				Double z = Double.parseDouble(textFieldZ.getText());
 				switch (VarNum) {
 				case 1:
-					if (mem1 == null) mem1 = x;
-					else Result += mem1;
+					mem1 += Result;
+					textFieldResult.setText(mem1.toString());
 					break;
 				case 2:
-					if (mem2 == null) mem2 = y;
-					else Result += mem2;
+					mem2 += Result;
+					textFieldResult.setText(mem2.toString());
 					break;
 				case 3:
-					if (mem3 == null) mem3 = z;
-					else Result += mem3;
+					mem3 += Result;
+					textFieldResult.setText(mem3.toString());
 					break;
-				}
-				 textFieldResult.setText(Result.toString());
+				}				 
 			}
 		});
 		Box hboxButtons = Box.createHorizontalBox();
