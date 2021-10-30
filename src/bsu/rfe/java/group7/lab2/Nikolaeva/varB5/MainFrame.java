@@ -36,13 +36,13 @@ public class MainFrame extends JFrame {
 	private Box hboxFormulaType = Box.createHorizontalBox();
 	private int formulaId = 1;
 	public Double calculate1(Double x, Double y, Double z) {
-		//return Math.pow(Math.cos(Math.PI*x*x*x)+Math.log((1+y)*(1+y)), 0.25)*(Math.pow(Math.E,z*z)+Math.sqrt(1/x)+Math.cos(Math.pow(Math.E,y)));
-	return x*y*z;
+		return Math.pow(Math.cos(Math.PI*x*x*x)+Math.log((1+y)*(1+y)), 0.25)*(Math.pow(Math.E,z*z)+Math.sqrt(1/x)+Math.cos(Math.pow(Math.E,y)));
 	}
 	public Double calculate2(Double x, Double y, Double z) {
-		//return Math.pow(Math.E, 0.5*x)/(Math.sqrt(z+y)*z*Math.log(x));
-		return x+y+z;
+		return Math.pow(Math.E, 0.5*x)/(Math.sqrt(z+y)*z*Math.log(x));
 	}
+	
+	//радиокнопки для формул
 	private void addRadioButton(String buttonName, final int formulaId) {
 		JRadioButton button = new JRadioButton(buttonName);
 		button.addActionListener(new ActionListener() {
@@ -53,6 +53,8 @@ public class MainFrame extends JFrame {
 		radioButtons.add(button);
 		hboxFormulaType.add(button);
 	}
+	
+	//радиокнопки для переменных
 	Box hboxVars = Box.createHorizontalBox();
 	private int VarNum = 1;
 	private void addRadioVar(String buttonName, final int VarNum) {
@@ -71,6 +73,8 @@ public class MainFrame extends JFrame {
 	Toolkit kit = Toolkit.getDefaultToolkit();
 	setLocation((kit.getScreenSize().width - WIDTH)/2,
 	(kit.getScreenSize().height - HEIGHT)/2);
+	
+	//коробка с радиокнопками для формул
 	hboxFormulaType.add(Box.createHorizontalGlue());
 	addRadioButton("Formula 1", 1);
 	addRadioButton("Formula 2", 2);
@@ -88,6 +92,8 @@ public class MainFrame extends JFrame {
 	JLabel labelForZ = new JLabel("Z:");
 	textFieldZ = new JTextField("0", 10);
 	textFieldZ.setMaximumSize(textFieldX.getPreferredSize());
+	
+	//коробка со значениями переменных
 	Box hboxVariables = Box.createHorizontalBox();
 	hboxVariables.setBorder(
 	BorderFactory.createLineBorder(Color.RED));
@@ -108,6 +114,8 @@ public class MainFrame extends JFrame {
 	textFieldResult = new JTextField("0", 10);
 	textFieldResult.setMaximumSize(
 	textFieldResult.getPreferredSize());
+	
+	//коробка с результатом
 	Box hboxResult = Box.createHorizontalBox();
 	hboxResult.add(Box.createHorizontalGlue());
 	hboxResult.add(labelForResult);
@@ -115,6 +123,8 @@ public class MainFrame extends JFrame {
 	hboxResult.add(textFieldResult);
 	hboxResult.add(Box.createHorizontalGlue());
 	hboxResult.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+
+	//коробка с радиокнопками для переменных 
 	hboxVars.add(Box.createHorizontalGlue());
 	addRadioVar("Variable 1", 1);
 	addRadioVar("Variable 2", 2);
@@ -190,6 +200,8 @@ public class MainFrame extends JFrame {
 				}				 
 			}
 		});
+		
+		//коробка с кнопками
 		Box hboxButtons = Box.createHorizontalBox();
 		hboxButtons.add(Box.createHorizontalGlue());
 		hboxButtons.add(buttonCalc);
@@ -202,6 +214,8 @@ public class MainFrame extends JFrame {
 		hboxButtons.add(Box.createHorizontalGlue());
 		hboxButtons.setBorder(
 		BorderFactory.createLineBorder(Color.GREEN));
+		
+		//сборка вертикальной коробки
 		Box contentBox = Box.createVerticalBox();
 		contentBox.add(Box.createVerticalGlue());
 		contentBox.add(hboxFormulaType);
