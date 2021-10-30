@@ -24,11 +24,15 @@ public class MainFrame extends JFrame {
 
 	private static final int WIDTH = 450;
 	private static final int HEIGHT = 320;
+	int mem1;
+	int mem2;
+	int mem3;
 	private JTextField textFieldX;
 	private JTextField textFieldY;
 	private JTextField textFieldZ;
 	private JTextField textFieldResult;
 	private ButtonGroup radioButtons = new ButtonGroup();
+	private ButtonGroup radioVars = new ButtonGroup();
 	private Box hboxFormulaType = Box.createHorizontalBox();
 	private int formulaId = 1;
 	public Double calculate1(Double x, Double y, Double z) {
@@ -47,6 +51,18 @@ public class MainFrame extends JFrame {
 		radioButtons.add(button);
 		hboxFormulaType.add(button);
 	}
+	Box hboxVars = Box.createHorizontalBox();
+	private int VarNum = 1;
+	private void addRadioVar(String buttonName, final int formulaId) {
+		JRadioButton button = new JRadioButton(buttonName);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				MainFrame.this.VarNum = VarNum;
+			}
+		});
+		radioVars.add(button);
+		hboxVars.add(button);
+	}
 	public MainFrame() {
 	super("Formula calculating");
 	setSize(WIDTH, HEIGHT);
@@ -62,15 +78,12 @@ public class MainFrame extends JFrame {
 	hboxFormulaType.setBorder(
 	BorderFactory.createLineBorder(Color.YELLOW));
 	JLabel labelForX = new JLabel("X:");
-	JLabel RadioX = new JLabel("X");
 	textFieldX = new JTextField("0", 10);
 	textFieldX.setMaximumSize(textFieldX.getPreferredSize());
 	JLabel labelForY = new JLabel("Y:");
-	JLabel RadioY = new JLabel("Y");
 	textFieldY = new JTextField("0", 10);
 	textFieldY.setMaximumSize(textFieldY.getPreferredSize());
 	JLabel labelForZ = new JLabel("Z:");
-	JLabel RadioZ = new JLabel("Z");
 	textFieldZ = new JTextField("0", 10);
 	textFieldZ.setMaximumSize(textFieldX.getPreferredSize());
 	Box hboxVariables = Box.createHorizontalBox();
@@ -100,13 +113,12 @@ public class MainFrame extends JFrame {
 	hboxResult.add(textFieldResult);
 	hboxResult.add(Box.createHorizontalGlue());
 	hboxResult.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-	Box hboxVars = Box.createHorizontalBox();
 	hboxVars.add(Box.createHorizontalGlue());
-	hboxVars.add(RadioX);
-	hboxVars.add(Box.createHorizontalStrut(10));
-	hboxVars.add(RadioY);
-	hboxVars.add(Box.createHorizontalStrut(10));
-	hboxVars.add(RadioZ);
+	addRadioVar("X", 1);
+	addRadioVar("Y", 2);
+	addRadioVar("Z", 3);
+	radioVars.setSelected(
+	radioVars.getElements().nextElement().getModel(), true);
 	hboxVars.add(Box.createHorizontalGlue());
 	hboxVars.setBorder(
 	BorderFactory.createLineBorder(Color.ORANGE));
@@ -141,6 +153,11 @@ public class MainFrame extends JFrame {
 			}
 		});
 		JButton buttonMC = new JButton("MC");
+		buttonMC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				
+			}
+		});
 		JButton buttonMplus = new JButton("M+");
 		Box hboxButtons = Box.createHorizontalBox();
 		hboxButtons.add(Box.createHorizontalGlue());
