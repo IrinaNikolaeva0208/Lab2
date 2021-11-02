@@ -22,7 +22,7 @@ import javax.swing.JTextField;
 
 public class MainFrame extends JFrame {
 
-	private static final int WIDTH = 450;
+	private static final int WIDTH = 650;
 	private static final int HEIGHT = 320;
 	Double mem1 = 0.0;
 	Double mem2 = 0.0;
@@ -31,6 +31,7 @@ public class MainFrame extends JFrame {
 	private JTextField textFieldY;
 	private JTextField textFieldZ;
 	private JTextField textFieldResult;
+	private JTextField textFieldMem;
 	private ButtonGroup radioButtons = new ButtonGroup();
 	private ButtonGroup radioVars = new ButtonGroup();
 	private Box hboxFormulaType = Box.createHorizontalBox();
@@ -62,6 +63,17 @@ public class MainFrame extends JFrame {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				MainFrame.this.VarNum = VarNum;
+				switch (VarNum) {
+				case 1:
+				textFieldMem.setText(mem1.toString());
+				break;
+				case 2:
+					textFieldMem.setText(mem2.toString());
+					break;
+				case 3:
+					textFieldMem.setText(mem3.toString());
+					break;
+				}
 			}
 		});
 		radioVars.add(button);
@@ -97,23 +109,25 @@ public class MainFrame extends JFrame {
 	Box hboxVariables = Box.createHorizontalBox();
 	hboxVariables.setBorder(
 	BorderFactory.createLineBorder(Color.RED));
-	hboxVariables.add(Box.createHorizontalGlue());
 	hboxVariables.add(labelForX);
 	hboxVariables.add(Box.createHorizontalStrut(10));
 	hboxVariables.add(textFieldX);
-	hboxVariables.add(Box.createHorizontalStrut(10));
+	hboxVariables.add(Box.createHorizontalGlue());
 	hboxVariables.add(labelForY);
 	hboxVariables.add(Box.createHorizontalStrut(10));
 	hboxVariables.add(textFieldY);
-	hboxVariables.add(Box.createHorizontalStrut(10));
+	hboxVariables.add(Box.createHorizontalGlue());
 	hboxVariables.add(labelForZ);
 	hboxVariables.add(Box.createHorizontalStrut(10));
 	hboxVariables.add(textFieldZ);
-	hboxVariables.add(Box.createHorizontalGlue());
 	JLabel labelForResult = new JLabel("Result:");
-	textFieldResult = new JTextField("0", 10);
+	textFieldResult = new JTextField("0", 20);
 	textFieldResult.setMaximumSize(
 	textFieldResult.getPreferredSize());
+	JLabel labelForMem = new JLabel("Memory:");
+	textFieldMem = new JTextField("0", 20);
+	textFieldMem.setMaximumSize(
+	textFieldMem.getPreferredSize());
 	
 	//Result box
 	Box hboxResult = Box.createHorizontalBox();
@@ -121,6 +135,10 @@ public class MainFrame extends JFrame {
 	hboxResult.add(labelForResult);
 	hboxResult.add(Box.createHorizontalStrut(10));
 	hboxResult.add(textFieldResult);
+	hboxResult.add(Box.createHorizontalStrut(10));
+	hboxResult.add(labelForMem);
+	hboxResult.add(Box.createHorizontalStrut(10));
+	hboxResult.add(textFieldMem);
 	hboxResult.add(Box.createHorizontalGlue());
 	hboxResult.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
@@ -187,15 +205,15 @@ public class MainFrame extends JFrame {
 				switch (VarNum) {
 				case 1:
 					mem1 += Result;
-					textFieldResult.setText(mem1.toString());
+					textFieldMem.setText(mem1.toString());
 					break;
 				case 2:
 					mem2 += Result;
-					textFieldResult.setText(mem2.toString());
+					textFieldMem.setText(mem2.toString());
 					break;
 				case 3:
 					mem3 += Result;
-					textFieldResult.setText(mem3.toString());
+					textFieldMem.setText(mem3.toString());
 					break;
 				}				 
 			}
@@ -220,9 +238,9 @@ public class MainFrame extends JFrame {
 		contentBox.add(Box.createVerticalGlue());
 		contentBox.add(hboxFormulaType);
 		contentBox.add(hboxVariables);
-		contentBox.add(hboxResult);
 		contentBox.add(hboxVars);
 		contentBox.add(hboxButtons);
+		contentBox.add(hboxResult);
 		contentBox.add(Box.createVerticalGlue());
 		getContentPane().add(contentBox, BorderLayout.CENTER);
 		}
